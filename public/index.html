@@ -181,5 +181,926 @@
     update();
   </script>
 
+</bod<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethio Bonus 2026</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0b1220;
+  color:white;
+}
+
+.container{
+  max-width:480px;
+  margin:auto;
+  padding:20px;
+}
+
+.header{
+  text-align:center;
+  padding:15px 0;
+}
+
+.header h1{
+  margin:0;
+  font-size:30px;
+}
+
+.card{
+  background:#151f33;
+  border-radius:18px;
+  padding:20px;
+  margin:15px 0;
+}
+
+.balance{
+  text-align:center;
+}
+
+.balance h2{
+  font-size:38px;
+  margin:10px 0;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#21c46b;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:disabled{
+  background:#555;
+}
+
+input,select{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border:1px solid #39445a;
+  border-radius:10px;
+  background:#0d1627;
+  color:white;
+  font-size:15px;
+}
+
+.task{
+  padding:16px 0;
+  border-bottom:1px solid #29344a;
+}
+
+.task:last-child{
+  border-bottom:none;
+}
+
+.task button{
+  margin-top:10px;
+}
+
+.stats{
+  display:flex;
+  gap:12px;
+}
+
+.stat{
+  flex:1;
+  text-align:center;
+  background:#151f33;
+  padding:15px;
+  border-radius:15px;
+}
+
+.stat strong{
+  display:block;
+  font-size:23px;
+}
+
+.hidden{
+  display:none;
+}
+
+.small{
+  color:#aeb8ca;
+  font-size:13px;
+}
+
+.warning{
+  background:#332b15;
+  color:#ffd76a;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+.success{
+  background:#123321;
+  color:#6dff9b;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+.linkBtn{
+  background:#229ed9;
+  margin-top:8px;
+}
+
+.logout{
+  background:#b83232;
+}
+
+h2{
+  margin-top:0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="auth">
+
+  <div class="header">
+    <h1>🎁 Ethio Bonus</h1>
+    <p>Welcome to Ethio Bonus 2026</p>
+  </div>
+
+  <div class="card">
+
+    <h2 id="authTitle">🔐 Login</h2>
+
+    <input
+      type="tel"
+      id="phone"
+      placeholder="Phone number"
+      maxlength="15"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password (6+ characters)"
+    >
+
+    <button onclick="login()">Login</button>
+
+    <p style="text-align:center">
+      Don't have an account?
+    </p>
+
+    <button onclick="showRegister()">
+      Register
+    </button>
+
+    <p id="authMessage"></p>
+
+  </div>
+
+</div>
+
+
+<!-- REGISTER -->
+<div id="register" class="hidden">
+
+  <div class="header">
+    <h1>📝 Register</h1>
+  </div>
+
+  <div class="card">
+
+    <input
+      type="tel"
+      id="regPhone"
+      placeholder="Phone number"
+      maxlength="15"
+    >
+
+    <input
+      type="password"
+      id="regPassword"
+      placeholder="Password (minimum 6 characters)"
+    >
+
+    <input
+      type="password"
+      id="regConfirm"
+      placeholder="Confirm password"
+    >
+
+    <button onclick="registerUser()">
+      Create Account
+    </button>
+
+    <button
+      onclick="showLogin()"
+      style="background:#555;margin-top:10px"
+    >
+      Back to Login
+    </button>
+
+    <p id="registerMessage"></p>
+
+  </div>
+
+</div>
+
+
+<!-- APP -->
+<div id="app" class="hidden">
+
+  <div class="header">
+    <h1>🎁 Ethio Bonus</h1>
+    <p>Welcome to Ethio Bonus 2026</p>
+  </div>
+
+
+  <!-- BALANCE -->
+  <div class="card balance">
+
+    <p>Your Balance</p>
+
+    <h2 id="balance">0 ETB</h2>
+
+    <button id="bonusBtn" onclick="claimBonus()">
+      🎁 Claim Daily Bonus
+    </button>
+
+  </div>
+
+
+  <!-- STATS -->
+  <div class="stats">
+
+    <div class="stat">
+      <strong id="points">0</strong>
+      Points
+    </div>
+
+    <div class="stat">
+      <strong id="tasks">0</strong>
+      Tasks
+    </div>
+
+  </div>
+
+
+  <!-- TASKS -->
+  <div class="card">
+
+    <h2>📋 Tasks</h2>
+
+    <div class="task">
+
+      <strong>Daily Check-in</strong>
+      <br>
+
+      <small>+10 Points</small>
+
+      <button
+        id="checkinBtn"
+        onclick="completeTask('checkin',10)"
+      >
+        Complete
+      </button>
+
+    </div>
+
+
+    <div class="task">
+
+      <strong>Bonus Task</strong>
+      <br>
+
+      <small>+25 Points</small>
+
+      <button
+        id="bonusTaskBtn"
+        onclick="completeTask('bonus',25)"
+      >
+        Complete
+      </button>
+
+    </div>
+
+
+    <!-- TELEGRAM TASK -->
+    <div class="task">
+
+      <strong>📢 Join Telegram Channel</strong>
+
+      <p class="small">
+        Join the channel first, then confirm the task.
+      </p>
+
+      <button
+        class="linkBtn"
+        onclick="openTelegram()"
+      >
+        Open Telegram Channel
+      </button>
+
+      <button
+        id="telegramBtn"
+        onclick="confirmTelegram()"
+        style="margin-top:8px"
+      >
+        ✅ I Joined
+      </button>
+
+      <p id="telegramMessage" class="small"></p>
+
+    </div>
+
+  </div>
+
+
+  <!-- WITHDRAW -->
+  <div class="card">
+
+    <h2>💰 Withdraw</h2>
+
+    <p class="small">
+      Demo withdrawal only. No real money is transferred.
+    </p>
+
+    <select id="method">
+
+      <option value="Telebirr">
+        📱 Telebirr
+      </option>
+
+    </select>
+
+    <input
+      type="tel"
+      id="withdrawPhone"
+      placeholder="Telebirr phone number"
+    >
+
+    <input
+      type="number"
+      id="withdrawAmount"
+      placeholder="Amount in ETB"
+    >
+
+    <button onclick="withdraw()">
+      Withdraw
+    </button>
+
+    <p id="withdrawMessage"></p>
+
+  </div>
+
+
+  <!-- ACCOUNT -->
+  <div class="card">
+
+    <h2>👤 Account</h2>
+
+    <p>
+      Phone:
+      <strong id="accountPhone"></strong>
+    </p>
+
+    <button
+      class="logout"
+      onclick="logout()"
+    >
+      Logout
+    </button>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* -------------------------
+   DEMO ACCOUNT
+------------------------- */
+
+let user = JSON.parse(
+  localStorage.getItem("ethioUser")
+) || null;
+
+let balance =
+  Number(localStorage.getItem("balance")) || 0;
+
+let points =
+  Number(localStorage.getItem("points")) || 0;
+
+let tasks =
+  Number(localStorage.getItem("tasks")) || 0;
+
+let completed =
+  JSON.parse(localStorage.getItem("completedTasks")) || {};
+
+
+/* -------------------------
+   SAVE
+------------------------- */
+
+function save(){
+
+  localStorage.setItem(
+    "balance",
+    balance
+  );
+
+  localStorage.setItem(
+    "points",
+    points
+  );
+
+  localStorage.setItem(
+    "tasks",
+    tasks
+  );
+
+  localStorage.setItem(
+    "completedTasks",
+    JSON.stringify(completed)
+  );
+}
+
+
+/* -------------------------
+   AUTH
+------------------------- */
+
+function showRegister(){
+
+  document.getElementById("auth")
+    .classList.add("hidden");
+
+  document.getElementById("register")
+    .classList.remove("hidden");
+}
+
+
+function showLogin(){
+
+  document.getElementById("register")
+    .classList.add("hidden");
+
+  document.getElementById("auth")
+    .classList.remove("hidden");
+}
+
+
+function registerUser(){
+
+  const phone =
+    document.getElementById("regPhone").value.trim();
+
+  const password =
+    document.getElementById("regPassword").value;
+
+  const confirm =
+    document.getElementById("regConfirm").value;
+
+  const msg =
+    document.getElementById("registerMessage");
+
+
+  if(!phone){
+
+    msg.innerText =
+      "❌ Please enter your phone number.";
+
+    return;
+  }
+
+
+  if(password.length < 6){
+
+    msg.innerText =
+      "❌ Password must be at least 6 characters.";
+
+    return;
+  }
+
+
+  if(password !== confirm){
+
+    msg.innerText =
+      "❌ Passwords do not match.";
+
+    return;
+  }
+
+
+  /*
+    Demo only:
+    Password is not sent to a server.
+    This is NOT suitable for production authentication.
+  */
+
+  user = {
+    phone: phone,
+    password: password
+  };
+
+
+  localStorage.setItem(
+    "ethioUser",
+    JSON.stringify(user)
+  );
+
+
+  msg.innerText =
+    "✅ Account created successfully.";
+
+  setTimeout(showLogin,700);
+}
+
+
+function login(){
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const msg =
+    document.getElementById("authMessage");
+
+
+  if(!user){
+
+    msg.innerText =
+      "❌ No account found. Please register.";
+
+    return;
+  }
+
+
+  if(
+    phone !== user.phone ||
+    password !== user.password
+  ){
+
+    msg.innerText =
+      "❌ Incorrect phone number or password.";
+
+    return;
+  }
+
+
+  openApp();
+}
+
+
+function logout(){
+
+  document.getElementById("app")
+    .classList.add("hidden");
+
+  document.getElementById("auth")
+    .classList.remove("hidden");
+}
+
+
+/* -------------------------
+   APP
+------------------------- */
+
+function openApp(){
+
+  document.getElementById("auth")
+    .classList.add("hidden");
+
+  document.getElementById("register")
+    .classList.add("hidden");
+
+  document.getElementById("app")
+    .classList.remove("hidden");
+
+  document.getElementById("accountPhone")
+    .innerText = user.phone;
+
+  update();
+}
+
+
+function update(){
+
+  document.getElementById("balance")
+    .innerText =
+    balance + " ETB";
+
+  document.getElementById("points")
+    .innerText =
+    points;
+
+  document.getElementById("tasks")
+    .innerText =
+    tasks;
+
+
+  if(completed.checkin){
+
+    const b =
+      document.getElementById("checkinBtn");
+
+    b.disabled = true;
+    b.innerText = "✅ Done";
+  }
+
+
+  if(completed.bonus){
+
+    const b =
+      document.getElementById("bonusTaskBtn");
+
+    b.disabled = true;
+    b.innerText = "✅ Done";
+  }
+
+
+  if(completed.telegram){
+
+    const b =
+      document.getElementById("telegramBtn");
+
+    b.disabled = true;
+    b.innerText = "✅ Completed";
+  }
+}
+
+
+/* -------------------------
+   DAILY BONUS
+------------------------- */
+
+function claimBonus(){
+
+  if(localStorage.getItem("dailyBonus") ===
+     new Date().toDateString()){
+
+    alert("You already claimed today's bonus.");
+
+    return;
+  }
+
+
+  balance += 5;
+  points += 10;
+
+
+  localStorage.setItem(
+    "dailyBonus",
+    new Date().toDateString()
+  );
+
+
+  document.getElementById("bonusBtn")
+    .disabled = true;
+
+  document.getElementById("bonusBtn")
+    .innerText =
+    "✅ Bonus Claimed";
+
+
+  save();
+  update();
+}
+
+
+/* -------------------------
+   TASKS
+------------------------- */
+
+function completeTask(name,reward){
+
+  if(completed[name]) return;
+
+
+  points += reward;
+  tasks += 1;
+
+  completed[name] = true;
+
+
+  save();
+  update();
+}
+
+
+/* -------------------------
+   TELEGRAM
+------------------------- */
+
+function openTelegram(){
+
+  /*
+    Replace this with YOUR public Telegram
+    channel link.
+  */
+
+  window.open(
+    "https://t.me/",
+    "_blank"
+  );
+}
+
+
+function confirmTelegram(){
+
+  const message =
+    document.getElementById("telegramMessage");
+
+  /*
+    Demo only.
+    A real website must verify Telegram
+    membership using a Telegram Bot/backend
+    before awarding real rewards.
+  */
+
+  if(completed.telegram){
+
+    message.innerText =
+      "Already completed.";
+
+    return;
+  }
+
+
+  points += 20;
+  tasks += 1;
+
+  completed.telegram = true;
+
+
+  message.innerText =
+    "✅ Demo task completed.";
+
+  save();
+  update();
+}
+
+
+/* -------------------------
+   WITHDRAW
+------------------------- */
+
+function withdraw(){
+
+  const method =
+    document.getElementById("method").value;
+
+  const phone =
+    document.getElementById("withdrawPhone").value.trim();
+
+  const amount =
+    Number(
+      document.getElementById("withdrawAmount").value
+    );
+
+  const message =
+    document.getElementById("withdrawMessage");
+
+
+  if(!phone){
+
+    message.className = "warning";
+
+    message.innerText =
+      "❌ Enter a Telebirr phone number.";
+
+    return;
+  }
+
+
+  if(!amount || amount <= 0){
+
+    message.className = "warning";
+
+    message.innerText =
+      "❌ Enter a valid amount.";
+
+    return;
+  }
+
+
+  if(amount > balance){
+
+    message.className = "warning";
+
+    message.innerText =
+      "❌ Insufficient demo balance.";
+
+    return;
+  }
+
+
+  /*
+    DEMO ONLY.
+    No real Telebirr transaction happens.
+  */
+
+  balance -= amount;
+
+  save();
+  update();
+
+
+  message.className = "success";
+
+  message.innerText =
+    "✅ Demo withdrawal request created via "
+    + method
+    + ". No real money was transferred.";
+}
+
+
+/* -------------------------
+   START
+------------------------- */
+
+if(user){
+
+  openApp();
+
+}else{
+
+  document.getElementById("auth")
+    .classList.remove("hidden");
+}
+
+update();
+
+</script>
+function openTelegram() {
+  window.open(
+    "https://t.me/TechPulsone1",
+    "_blank"
+  );
+}
+
+function confirmTelegram() {
+  const btn = document.getElementById("telegramBtn");
+  const message = document.getElementById("telegramMessage");
+
+  btn.disabled = true;
+  btn.innerText = "✅ Task Completed";
+
+  message.innerText = "Telegram task completed (Demo).";
+
+  points += 20;
+  tasks += 1;
+
+  save();
+  update();
+}function openTelegram() {
+    window.open(
+        "https://t.me/TechPulsone1",
+            "_blank"
+              );
+              }
+
+              function confirmTelegram() {
+                const btn = document.getElementById("telegramBtn");
+                  const message = document.getElementById("telegramMessage");
+
+                    btn.disabled = true;
+                      btn.innerText = "✅ Task Completed";
+
+                        message.innerText = "Telegram task completed (Demo).";
+
+                          points += 20;
+                            tasks += 1;
+
+                              save();
+   window.open(
+  "https://t.me/TechPulsone1",
+  "_blank"
+);window.open(
+    "https://t.me/TechPulsone1",
+      "_blank"
+      );
+)                             update();
+                                }
+}
 </body>
+</html>y>
         </html>
