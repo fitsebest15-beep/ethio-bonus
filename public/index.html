@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethio Bonus 2026</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1220;
+      color: white;
+    }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      padding: 15px 0;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .card {
+      background: #151f33;
+      border-radius: 18px;
+      padding: 20px;
+      margin: 15px 0;
+    }
+    .balance {
+      text-align: center;
+    }
+    .balance h2 {
+      font-size: 36px;
+      margin: 10px 0;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #21c46b;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #555;
+    }
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 0;
+      border-bottom: 1px solid #29344a;
+    }
+    .task:last-child {
+      border-bottom: none;
+    }
+    .task button {
+      width: auto;
+      padding: 10px 15px;
+    }
+    .stats {
+      display: flex;
+      gap: 12px;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      background: #151f33;
+      padding: 15px;
+      border-radius: 15px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 22px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="header">
+      <h1>🎁 Ethio Bonus</h1>
+      <p>Welcome to Ethio Bonus 2026</p>
+    </div>
+
+    <div class="card balance">
+      <p>Your Balance</p>
+      <h2 id="balance">0 ETB</h2>
+      <button onclick="claimBonus()" id="bonusBtn">
+        🎁 Claim Daily Bonus
+      </button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="points">0</strong>
+        Points
+      </div>
+
+      <div class="stat">
+        <strong id="tasks">0</strong>
+        Tasks
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📋 Tasks</h2>
+
+      <div class="task">
+        <div>
+          <strong>Daily Check-in</strong>
+          <br>
+          <small>+10 Points</small>
+        </div>
+        <button onclick="completeTask(this, 10)">
+          Complete
+        </button>
+      </div>
+
+      <div class="task">
+        <div>
+          <strong>Bonus Task</strong>
+          <br>
+          <small>+25 Points</small>
+        </div>
+        <button onclick="completeTask(this, 25)">
+          Complete
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let balance = 0;
+    let points = 0;
+    let tasks = 0;
+
+    function update() {
+      document.getElementById("balance").innerText =
+        balance + " ETB";
+
+      document.getElementById("points").innerText =
+        points;
+
+      document.getElementById("tasks").innerText =
+        tasks;
+    }
+
+    function claimBonus() {
+      balance += 5;
+      points += 10;
+
+      document.getElementById("bonusBtn").disabled = true;
+      document.getElementById("bonusBtn").innerText =
+        "✅ Bonus Claimed";
+
+      update();
+    }
+
+    function completeTask(button, reward) {
+      points += reward;
+      tasks += 1;
+
+      button.disabled = true;
+      button.innerText = "✅ Done";
+
+      update();
+    }
+
+    update();
+  </script>
+
+</body>
+        </html>
